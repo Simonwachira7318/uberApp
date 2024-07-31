@@ -1,17 +1,22 @@
 import { StyleSheet} from 'react-native'
 import React from 'react'
 import tw from 'twrnc'
-import MapView, {Marker} from 'react-native-maps';
+import MapView from 'react-native-maps';
+import { useSelector } from 'react-redux';
+import { selectOrigin } from '../slices/navslice';
 
 const YourMap = () => {
+  const origin = useSelector(selectOrigin);
+
   return (
     <MapView
     style={tw`flex-1`}
+    mapType="mutedStandard"
         initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitude: origin.location.lat,
+            longitude: origin.location.lng,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
         }}
     />
   )
@@ -19,4 +24,4 @@ const YourMap = () => {
 
 export default YourMap
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
